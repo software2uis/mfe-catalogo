@@ -1,0 +1,16 @@
+name: "Label PRs based on branch name"
+
+on:
+    pull_request:
+      types: [opened, synchronize]
+
+jobs:
+  assign-label:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Assign Label
+      if: startsWith(github.head_ref, 'feat/')
+      run: gh pr edit ${{ github.event.number }} --add-label "enhancement"
+    - name: Assign Fix Label
+      if: startsWith(github.head_ref, 'fix/')
+      run: gh pr edit ${{ github.event.number }} --add-label "fix"
