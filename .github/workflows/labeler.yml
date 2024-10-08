@@ -14,3 +14,5 @@ jobs:
     - name: Assign Fix Label
       if: startsWith(github.head_ref, 'fix/')
       run: gh pr edit ${{ github.event.number }} --add-label "fix"
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
