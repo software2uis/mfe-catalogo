@@ -1,27 +1,75 @@
-# CatalogoAppNew
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+# mfe-catalogo
+MFE encargado de la visualización y gestión del catálogo de productos, permitiendo al usuario explorar y filtrar productos disponibles.
 
-## Development server
+## Documentation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Find the full documentation for the project below:
 
-## Code scaffolding
+- [Getting Started](#)
+- [Architecture](#)
+- [API Reference](#)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development Setup
 
-## Build
+### Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Install [Node.js](https://nodejs.org) which includes [npm](https://www.npmjs.com/get-npm).
 
-## Running unit tests
+### Setting Up a Project
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/software2uis/mfe-catalogo.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Running end-to-end tests
+3. Run the application using Angular 17, module federation, and Webpack 5:
+   ```bash
+   npm start
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Module Federation and Webpack 5
 
-## Further help
+This project uses module federation in Webpack 5 to enable microfrontend architecture. To ensure correct setup, follow these additional steps:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Configure Module Federation:**
+   Ensure that the `webpack.config.js` contains the proper configuration for exposing and consuming remote modules. For example:
+
+   ```javascript
+   const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
+   module.exports = {
+     output: {
+       publicPath: "auto",
+     },
+     optimization: {
+       runtimeChunk: false,
+     },
+     plugins: [
+       new ModuleFederationPlugin({
+         name: "mfe_catalogo",
+         filename: "remoteEntry.js",
+         exposes: {
+           './ProductCatalog': './src/app/catalog/catalog.module.ts',
+         },
+         shared: {
+           "@angular/core": { singleton: true },
+           "@angular/common": { singleton: true },
+           "@angular/router": { singleton: true },
+         },
+       }),
+     ],
+   };
+   ```
+
+2. **Running the Application:**
+   The application can be run in standalone mode or as part of a host container with other microfrontends. Use `npm start` to serve it in development mode.
+
+### Contributing
+
+Please follow our [Contributing Guidelines](https://github.com/software2uis/.github/blob/main/CONTRIBUTING.md) to learn about the submission process and coding rules.
+
