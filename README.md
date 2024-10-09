@@ -3,6 +3,9 @@
 MFE encargado de la visualización y gestión del catálogo de productos, permitiendo al usuario explorar y filtrar productos disponibles.
 
 ## Documentation
+For the creation of this Angular project with Module Federation was needed the next:
+- angular-cli:18.2.7
+- angular-architects/module-federation:18.0.6
 
 Find the full documentation for the project below:
 
