@@ -1,3 +1,4 @@
+
 # mfe-catalogo
 MFE encargado de la visualización y gestión del catálogo de productos, permitiendo al usuario explorar y filtrar productos disponibles.
 
@@ -71,3 +72,4 @@ This project uses module federation in Webpack 5 to enable microfrontend archite
 ### Contributing
 
 Please follow our [Contributing Guidelines](https://github.com/software2uis/.github/blob/main/CONTRIBUTING.md) to learn about the submission process and coding rules.
+
