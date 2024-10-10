@@ -30,7 +30,7 @@ Find the full documentation for the project below:
    npm install
    ```
 
-3. Run the application using Angular 17, module federation, and Webpack 5:
+3. Run the application using Angular 18, module federation, and Webpack 5:
    ```bash
    npm start
    ```
