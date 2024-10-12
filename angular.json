@@ -20,19 +20,26 @@
 						"outputPath": "dist/catalogo-app-new",
 						"index": "src/index.html",
 						"polyfills": [
-							"zone.js"
+              "zone.js"
 						],
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							{
-								"glob": "**/*",
+              {
+                "glob": "**/*",
 								"input": "public",
 								"output": "."
 							}
 						],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
 						"styles": [
-							"src/styles.scss"
+							"src/styles.scss",
+              "node_modules/primeng/resources/themes/rhea/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
 						],
 						"scripts": [],
 						"main": "src/main.ts",
