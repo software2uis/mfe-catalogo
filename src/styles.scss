@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/rhea/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+// :host{
+//   --topbar-border: rgba(0, 0, 0, .05);
+//   --topbar-sticky-bg: rgba(255, 255, 255, .7);
+// }
+
+$topbar-border: rgba(0, 0, 0, .05);
+$topbar-sticky-bg: rgba(255, 255, 255, .7);
+$background-input: #f0f0f0;
+
+
+*{
+  font-size: 14px;
+}
+
+
+
+
+.mr-2{
+  margin-right: 2px;
+}
+
+.ml-2{
+  margin-left: 2px;
+}
+
+
+
+
+.layout-topbar{
+  .p-toolbar.p-component{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1100;
+    transition: background-color .5s, border-color .5s;
+    width: 100%;
+    border-bottom: 1px solid $topbar-border;
+    background-color: $topbar-sticky-bg;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    height: 5rem;
+    padding: 0 4rem;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
