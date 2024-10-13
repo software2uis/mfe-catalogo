@@ -1,0 +1,15 @@
+<p-splitter
+    [panelSizes]="[25, 75]"
+    [style]="{height: '100vh ', 'margin-top': '80px'}"
+    >
+    <ng-template pTemplate>
+        <div>
+            <app-filter-panel></app-filter-panel>
+        </div>
+    </ng-template>
+    <ng-template pTemplate>
+        <div>
+            <app-products-panel></app-products-panel>
+        </div>
+    </ng-template>
+</p-splitter>
