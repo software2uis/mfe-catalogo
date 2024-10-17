@@ -4,6 +4,8 @@ import { definePreset } from 'primeng/themes';
 import { Aura } from 'primeng/themes/aura';
 import { PrimeNGConfig } from 'primeng/api';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { Store } from '@ngrx/store';
+import { selectProducts } from './store/products.actions';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +17,16 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 export class AppComponent {
   title = 'catalogo-app-new';
   public config: PrimeNGConfig = inject(PrimeNGConfig);
+  private store = inject(Store);
 
   constructor() {
     this.config.theme.set({preset: Noir});
 }
+
+  ngOnInit(){
+    this.store.select(selectProducts).subscribe((products) => {console.log(products)});
+
+  }
 
 }
 

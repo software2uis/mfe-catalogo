@@ -13,5 +13,8 @@ import { ToolbarModule } from 'primeng/toolbar';
   styleUrl: './top-bar.component.scss'
 })
 export class TopBarComponent {
+  xd(text:Event){
+    console.log(text);
+  }
 
 }
