@@ -1,10 +1,10 @@
-import { Product } from "./products.model";
 import {
   createAction,
   createFeatureSelector,
   createSelector,
   props,
 } from '@ngrx/store';
+import { Product } from '../models/product.interface';
 
 // Feature Selector
 export const selectProducts =

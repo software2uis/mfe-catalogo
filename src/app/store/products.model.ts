@@ -1,7 +1,3 @@
-export interface Product{
-  id: number
-  name: string
-  price: number
-}
+import { Product } from "../models/product.interface";
 
 export const initialState: Product[] = [];

@@ -8,7 +8,7 @@
   <div class="p-toolbar-group-end">
     <p-iconfield iconPosition="left">
       <p-inputicon styleClass="pi pi-search" />
-      <input (input)="xd($event )" type="text" pInputText placeholder="Search" />
+      <input #inputValue (keyup.enter)="searchProductsWithQuery(inputValue.value)" type="text" pInputText placeholder="Search" />
   </p-iconfield>
 
 

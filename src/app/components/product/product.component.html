@@ -3,15 +3,15 @@
 <div class="product">
 
   <div class="image-container">
-    <img  class="resize" src="https://m.media-amazon.com/images/I/515qJzsjT4L._AC_UY218_.jpg" alt="xd" />
+    <img  class="resize" [src]="ProductImages[id]" alt="xd" />
   </div>
 
 
   <div class="product-info">
     <div class="text">
 
-      <h3>Product Name</h3>
-      <span class="money"> {{30000 | currency}}</span>
+      <h3 style="cursor: pointer;" [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" >{{name}}</h3>
+      <span class="money"> {{price | currency}}</span>
       <div class="stars">
 
         @for (item of [1,2,3,4,5]; track $index) {
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <p-button label="Add to cart" />
+    <p-button [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" label="Add to cart" />
 
   </div>
 

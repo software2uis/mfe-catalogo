@@ -23,10 +23,6 @@ export class AppComponent {
     this.config.theme.set({preset: Noir});
 }
 
-  ngOnInit(){
-    this.store.select(selectProducts).subscribe((products) => {console.log(products)});
-
-  }
 
 }
 

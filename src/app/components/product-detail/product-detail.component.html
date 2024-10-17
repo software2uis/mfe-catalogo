@@ -1,44 +1,32 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Producto</title>
-    <link rel="stylesheet" href="product-detail.component.scss">
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <h1>SHOP.CO</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">On Sale</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Brands</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section class="product-detail">
+        <section style="margin-top: 80px;" class="product-detail">
             <div class="product-images">
-                <img src="assets/images/product-detail/seleccion.png" alt="Imagen frontal" class="main-image">
+
+              @defer (on timer(1000 ms)) {
+                  <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
+                }
+
             </div>
-            
+
 
             <div class="product-info">
-                <h2>Camiseta Unisex Adidas Selección Colombia 100 años</h2>
+                <h2>{{product?.name}}</h2>
                 <p class="rating">4.5/5 ⭐⭐⭐⭐⭐ (465 reviews)</p>
                 <p class="price">
-                    <span class="current-price">$260</span> 
-                    <span class="original-price"> $300</span> 
+                    <span class="current-price">{{product?.price | currency}}</span>
+                    <span class="original-price"> $300</span>
                     <span class="discount">40% off</span>
                 </p>
-                <p class="description">Camiseta oficial de la selección colombia 100 años</p>
+                <p class="description">{{product?.description}}</p>
 
-                <div class="colors">
+                <h3 style="margin: 0.5rem 0 0.5rem 0;">Specifications</h3>
+                <ul>
+                  @for (item of product.specifications| keyvalue; track $index) {
+                    <li>{{item.key}}: {{item.value}}</li>
+
+                  }
+                </ul>
+                <!-- <div class="colors">
                     <p>Selecciona color:</p>
                     <button class="color-btn" style="background-color: #666633;"></button>
                     <button class="color-btn" style="background-color: #1e1e1e;"></button>
@@ -51,15 +39,16 @@
                     <button class="size-btn">M</button>
                     <button class="size-btn selected">L</button>
                     <button class="size-btn">XL</button>
-                </div>
+                </div> -->
 
                 <div class="quantity">
-                    <button class="quantity-btn">-</button>
-                    <input type="number" value="1" min="1" max="10">
-                    <button class="quantity-btn">+</button>
+                    <p-button (click)="minusQuantity()" [rounded]="true" [text]="true"  severity="secondary">-</p-button>
+
+                    <input [(ngModel)]="quantity" type="number" value="1" [min]="1" [max]="10">
+                    <p-button (click)="plusQuantity()" [rounded]="true" [text]="true"  severity="secondary">+</p-button>
                 </div>
 
-                <button class="add-to-cart-btn">Añadir al carrito</button>
+                <p-button pRipple label="Agregar al carrito" class="add-to-cart-btn"></p-button>
             </div>
         </section>
 
@@ -72,8 +61,3 @@
             </div>
             <!-- Agrega más reseñas aquí -->
         </section>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>

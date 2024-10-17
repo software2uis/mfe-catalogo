@@ -1,6 +1,6 @@
 <p-splitter
     [panelSizes]="[25, 75]"
-    [style]="{height: '100vh ', 'margin-top': '80px'}"
+    [style]="{'min-height': '80vh ', 'margin-top': '80px'}"
     >
     <ng-template pTemplate>
         <div class="panel">
@@ -10,7 +10,6 @@
     <ng-template pTemplate>
         <div class="panel">
             <app-products-panel></app-products-panel>
-            <app-product></app-product>
         </div>
     </ng-template>
 </p-splitter>
