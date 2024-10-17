@@ -41,20 +41,23 @@ header {
 .product-images {
     display: flex;
     justify-content: center;
-    align-items: center;  
-    margin: 20px;         
+    align-items: center;
+    margin: 20px;
 }
 
 .main-image {
-    max-width: 100%;       
-    height: auto;          
-    border-radius: 8px;     
+    max-width: 670px;
+    height: auto;
+    border-radius: 8px;
 }
 
+ul{
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
 
-.product-images img {
-    width: 100%;
 }
+
 
 .thumbnails {
     display: flex;

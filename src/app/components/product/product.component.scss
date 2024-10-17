@@ -1,0 +1,49 @@
+
+$image-background-color: #f7f7f7;
+
+.pi.pi-star-fill{
+  color: var(--p-yellow-300);
+}
+.pi.pi-star-half-fill{
+  color: var(--p-yellow-300);
+}
+
+
+.stars{
+  display:block
+}
+
+.product{
+  display: flex;
+  flex-direction: row;
+  gap: 1.75rem;
+}
+
+.product-info{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0rem 2rem 0rem;
+  justify-content: space-between;
+}
+
+.image-container{
+  width: 20rem;
+  height: 18.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $image-background-color;
+
+}
+
+img.resize {
+  width:18rem; /* you can use % */
+  height: auto;
+  background-color: $image-background-color;
+}
+
+.money{
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: monospace;
+}

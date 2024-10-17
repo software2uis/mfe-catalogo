@@ -1,0 +1,38 @@
+
+
+<div class="product">
+
+  <div class="image-container">
+    <img  class="resize" [src]="ProductImages[id]" alt="xd" />
+  </div>
+
+
+  <div class="product-info">
+    <div class="text">
+
+      <h3 style="cursor: pointer;" [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" >{{name}}</h3>
+      <span class="money"> {{price | currency}}</span>
+      <div class="stars">
+
+        @for (item of [1,2,3,4,5]; track $index) {
+
+          @if (rating >= item)
+          {
+
+            <i  class="pi pi-star-fill" ></i>
+
+          }@else if (rating >= item - 1){
+
+            <i class="pi pi-star-half-fill"></i>
+
+          }
+        }
+
+      </div>
+    </div>
+
+    <p-button [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" label="Add to cart" />
+
+  </div>
+
+</div>

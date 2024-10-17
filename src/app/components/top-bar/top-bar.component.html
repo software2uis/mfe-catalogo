@@ -8,18 +8,18 @@
   <div class="p-toolbar-group-end">
     <p-iconfield iconPosition="left">
       <p-inputicon styleClass="pi pi-search" />
-      <input type="text" pInputText placeholder="Search" />
+      <input #inputValue (keyup.enter)="searchProductsWithQuery(inputValue.value)" type="text" pInputText placeholder="Search" />
   </p-iconfield>
 
 
   <div class="buttons">
-    <p-button  severity="secondary">
+    <p-button [rounded]="true" [text]="true"  severity="secondary">
       <span class="material-symbols-outlined">
         shopping_cart
       </span>
     </p-button>
 
-    <p-button  severity="secondary">
+    <p-button [rounded]="true" [text]="true"  severity="secondary">
       <span class="material-symbols-outlined">
         account_circle
       </span>

@@ -1,1 +1,14 @@
-<p>products-panel works!</p>
+
+
+<div class="list-products">
+
+  @for (product of products; track $index) {
+    <app-product
+    [id]="$index"
+    [idMongo]="product.id"
+    [name]="product.name"
+    [price]="product.price"
+    ></app-product>
+  }
+
+</div>
