@@ -1,26 +1,25 @@
 
 # mfe-catalogo
-MFE encargado de la visualización y gestión del catálogo de productos, permitiendo al usuario explorar y filtrar productos disponibles.
+MFE responsible for the visualization and management of the product catalog, allowing the user to browse and filter available products.
 
-## Conexión VPN 
-Para conectarse al backend alojado en el servidor de la escuela es necesario instalar:
--  [Zerotier-one](https://www.zerotier.com/download/)
+## VPN Connection
+To connect to the backend hosted on the school's server, you need to install:
+- [Zerotier-one](https://www.zerotier.com/download/)
 
-Una vez instalado Zerotier es necesario unirse a la red privada:
+Once Zerotier is installed, you need to join the private network:
 #### Windows
-AL dar click derecho en el logo del programa ejecutandose en segundo plano debería salir algo asi.
+By right-clicking on the program logo running in the background, you should see something like this.
 <img style="width: 300px" src="https://docs.zerotier.com/assets/images/mac-menubar-01-1eeb6a47c344307a6b4126dc7c376960.png" />
 ## 
-Este es el código de la red:
+This is the network code:
 ```
 e4da7455b234aa14
 ```
 #### Linux
-Para usuarios linux ejecutar en consola y debería salir 200 OK
+For Linux users, run the following command in the terminal and you should see 200 OK
 ```
 zerotier-cli join e4da7455b234aa14
 ```
-
 
 ## Documentation
 For the creation of this Angular project with Module Federation was needed the next:
