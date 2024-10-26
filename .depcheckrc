@@ -1,0 +1,27 @@
+{
+  "ignores": [
+    "@types/*",
+    "webpack",
+    "src"
+  ],
+  "ignore-patterns": [
+    "*.scss",
+    "*.css"
+  ],
+  "parsers": {
+    "*.ts": ["typescript"],
+    "*.js": ["es6"],
+    "*.scss": [],
+    "*.css": []
+  },
+  "detectors": [
+    "requireCallExpression",
+    "importDeclaration"
+  ],
+  "specials": [
+    "bin",
+    "eslint",
+    "prettier",
+    "webpack"
+  ]
+}
