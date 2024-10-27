@@ -12,5 +12,4 @@ import { ProductComponent } from '../product/product.component';
   styleUrl: './home-panel.component.scss'
 })
 export class HomePanelComponent {
-
 }

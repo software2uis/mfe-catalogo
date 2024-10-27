@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectProducts } from '../../store/products.actions';
 import { Product, ProductImages } from '../../models/product.interface';
 import { forkJoin, map, switchMap, tap } from 'rxjs';
 import { ProductsService } from '../../services/products.service';
@@ -21,7 +20,6 @@ export class ProductDetailComponent {
   quantity: number = 1;  // Cantidad inicial
 
   route:ActivatedRoute = inject(ActivatedRoute);
-  store:Store = inject(Store);
   productsService:ProductsService = inject(ProductsService);
 
   idProducto:string = '';
