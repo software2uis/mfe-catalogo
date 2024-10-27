@@ -34,7 +34,9 @@
               ]
             },
 						"styles": [
-							"src/styles.scss"
+							"src/styles.scss",
+              "node_modules/primeng/resources/themes/aura-light-noir/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
 						],
 						"scripts": [],
 						"main": "src/main.ts",
