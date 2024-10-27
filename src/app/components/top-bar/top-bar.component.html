@@ -6,10 +6,17 @@
   </div>
 
   <div class="p-toolbar-group-end">
-    <p-iconfield iconPosition="left">
-      <p-inputicon styleClass="pi pi-search" />
-      <input #inputValue (keyup.enter)="searchProductsWithQuery(inputValue.value)" type="text" pInputText placeholder="Search" />
-  </p-iconfield>
+
+
+<span class="p-input-icon-left">
+  <i style="top: 25%;" class="pi pi-search"></i>
+  <input
+  pInputText
+  #inputValue
+  (keyup.enter)="searchProductsWithQuery(inputValue.value)"
+  type="text"
+  placeholder="Search" />
+</span>
 
 
   <div class="buttons">

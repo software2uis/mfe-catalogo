@@ -32,7 +32,8 @@ module.exports = {
         name: "mfe_catalogo",
         filename: "remoteEntry.js",
         exposes: {
-            './ProductCatalog': './/src/app/app.component.ts',
+            './AppComponent': './src/app/app.component.ts',
+            './RoutingModule': './src/app/app.routes.ts',
         },
 
         // For hosts (please adjust)

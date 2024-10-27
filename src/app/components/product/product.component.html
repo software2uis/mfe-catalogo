@@ -10,7 +10,7 @@
   <div class="product-info">
     <div class="text">
 
-      <h3 style="cursor: pointer;" [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" >{{name}}</h3>
+      <h3 style="cursor: pointer;" (click)="goToDetail()" >{{name}}</h3>
       <span class="money"> {{price | currency}}</span>
       <div class="stars">
 
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <p-button [routerLink]="['/product-detail',idMongo]" [queryParams]="{idImage:id}" label="Add to cart" />
+    <p-button (click)="goToDetail()" label="Add to cart" />
 
   </div>
 
