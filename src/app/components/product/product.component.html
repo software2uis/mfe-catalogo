@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <p-button (click)="goToDetail()" label="Add to cart" />
+    <p-button [routerLink]="['/product-detail/', idMongo]" [queryParams]="{idImage: id}" label="Add to cart" />
 
   </div>
 
