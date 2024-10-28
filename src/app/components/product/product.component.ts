@@ -16,6 +16,7 @@ export class ProductComponent {
 
 
   router = inject(Router);
+
   route = inject(ActivatedRoute);
 
   @Input() id:number = 0;
@@ -31,6 +32,7 @@ export class ProductComponent {
   goToDetail(){
     console.log(environment.production);
       this.router.navigate(['/product-detail/',this.idMongo], {queryParams:{idImage:this.id}});
+
   }
 
 }
