@@ -17,6 +17,8 @@ export class ProductComponent {
 
   router = inject(Router);
 
+  route = inject(ActivatedRoute);
+
   @Input() id:number = 0;
   @Input() idMongo:string = '';
   @Input() name:string = '';
@@ -28,10 +30,9 @@ export class ProductComponent {
 
 
   goToDetail(){
-    if(!environment.production){
+    console.log(environment.production);
+      this.router.navigate(['/product-detail/',this.idMongo], {queryParams:{idImage:this.id}});
 
-      this.router.navigate(['/catalogo-app/product-detail',this.idMongo], {queryParams:{idImage:this.id}});
-    }
   }
 
 }
