@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
-
+  standalone: true,
   imports: [ButtonModule, ToolbarModule, InputTextModule, IconFieldModule, InputIconModule, ],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss'
