@@ -1,16 +1,17 @@
-export interface Product {
-  id:             string;
-  catgory:        string;
-  name:           string;
-  description:    string;
-  price:          number;
-  image:          string;
-  specifications: {
-    [key: string]: any;
-}
-  // specifications: Record<any, any>
+export interface Specification {
+  name: string;
+  values: string[];
 }
 
+export interface Product {
+  id: string;
+  category: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  specifications: Specification[];
+}
 
 export const ProductImages  = [
    'https://importmobilsas.com/cdn/shop/products/s21.jpg?v=1685489202',
