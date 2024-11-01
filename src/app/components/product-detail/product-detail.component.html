@@ -20,27 +20,27 @@
                 <p class="description">{{product?.description}}</p>
 
                 <h3 style="margin: 0.5rem 0 0.5rem 0;">Specifications</h3>
-                <ul>
-                  @for (item of product?.specifications| keyvalue; track $index) {
-                    <li>{{item.key}}: {{item.value}}</li>
-
-                  }
-                </ul>
-                <!-- <div class="colors">
-                    <p>Selecciona color:</p>
-                    <button class="color-btn" style="background-color: #666633;"></button>
-                    <button class="color-btn" style="background-color: #1e1e1e;"></button>
-                    <button class="color-btn" style="background-color: #5c7f91;"></button>
-                </div>
-
-                <div class="sizes">
-                    <p>Selecciona tamaño:</p>
-                    <button class="size-btn">S</button>
-                    <button class="size-btn">M</button>
-                    <button class="size-btn selected">L</button>
-                    <button class="size-btn">XL</button>
-                </div> -->
-
+                <div class="specifications">
+                    <div *ngFor="let spec of product?.specifications" class="specification-group">
+                        <label>{{ spec.name }}</label>
+                        <div *ngIf="spec.name === 'Color'" class="color-options">
+                            <button *ngFor="let value of spec.values" 
+                                    class="color-btn" 
+                                    [ngStyle]="{'background-color': value}" 
+                                    [class.selected]="selectedSpecs[spec.name] === value"
+                                    (click)="selectedSpecs[spec.name] = value">
+                            </button>
+                        </div>
+                        <div *ngIf="spec.name !== 'Color'" class="size-options">
+                            <button *ngFor="let value of spec.values" 
+                                    class="size-btn" 
+                                    [class.selected]="selectedSpecs[spec.name] === value"
+                                    (click)="selectedSpecs[spec.name] = value">
+                                {{ value }}
+                            </button>
+                        </div>
+                    </div>
+                </div>         
                 <div class="quantity">
                     <p-button (click)="minusQuantity()" [rounded]="true" [text]="true"  severity="secondary">-</p-button>
 
