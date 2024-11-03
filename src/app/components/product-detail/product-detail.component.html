@@ -1,63 +1,59 @@
+<section class="product-info">
+    <div class="product-images">
+        @defer (on timer(1000 ms)) {
+            <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
+        }
+    </div>
 
-        <section style="margin-top: 80px;" class="product-detail">
-            <div class="product-images">
-
-              @defer (on timer(1000 ms)) {
-                  <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
-                }
-
+    <div class="product-details">
+        <h1 class="product-title">{{product?.name}}</h1>
+        <div class="product-rating">
+            <div class="stars">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fcd6232dcd342bd4dfc3d820d0a84b8db79146c27eb1274d052059d26b8532f?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc81743b1a9f424b78edf6ca642d56af350c93586420c327c6ab89243fa9ad0d?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0be8d9e9adcae95d9775e3762410c4f27eb177b989fcae672ef78f777ca1a771?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ce16bce060f92cb4284fd2eae8917daa4b347fff230a07d3a0174bfd62b11e0?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
             </div>
-
-
-            <div class="product-info">
-                <h2>{{product?.name}}</h2>
-                <p class="rating">4.5/5 ⭐⭐⭐⭐⭐ (465 reviews)</p>
-                <p class="price">
-                    <span class="current-price">{{product?.price | currency}}</span>
-                    <span class="original-price"> $300</span>
-                    <span class="discount">40% off</span>
-                </p>
-                <p class="description">{{product?.description}}</p>
-
-                <h3 style="margin: 0.5rem 0 0.5rem 0;">Specifications</h3>
-                <div class="specifications">
-                    <div *ngFor="let spec of product?.specifications" class="specification-group">
-                        <label>{{ spec.name }}</label>
-                        <div *ngIf="spec.name === 'Color'" class="color-options">
-                            <button *ngFor="let value of spec.values" 
-                                    class="color-btn" 
-                                    [ngStyle]="{'background-color': value}" 
-                                    [class.selected]="selectedSpecs[spec.name] === value"
-                                    (click)="selectedSpecs[spec.name] = value">
-                            </button>
-                        </div>
-                        <div *ngIf="spec.name !== 'Color'" class="size-options">
-                            <button *ngFor="let value of spec.values" 
-                                    class="size-btn" 
-                                    [class.selected]="selectedSpecs[spec.name] === value"
-                                    (click)="selectedSpecs[spec.name] = value">
-                                {{ value }}
-                            </button>
-                        </div>
-                    </div>
-                </div>         
-                <div class="quantity">
-                    <p-button (click)="minusQuantity()" [rounded]="true" [text]="true"  severity="secondary">-</p-button>
-
-                    <input [(ngModel)]="quantity" type="number" value="1" [min]="1" [max]="10">
-                    <p-button (click)="plusQuantity()" [rounded]="true" [text]="true"  severity="secondary">+</p-button>
-                </div>
-
-                <p-button  label="Agregar al carrito"></p-button>
+            <span class="rating-score">4.5/5</span>
+        </div>
+        <div class="product-price">
+            <span class="current-price">{{product?.price | currency}}</span>
+            <span class="original-price">$300</span>
+            <span class="discount-tag">40% off</span>
+        </div>
+        <p class="product-description">{{product?.description}}</p>
+        <div class="specifications">
+            <div *ngFor="let spec of product?.specifications">
+            <h2 class="section-title">Select {{ spec.name }}</h2>
+            <div class="options" [ngClass]="spec.name.toLowerCase() + '-options'">
+                <button *ngFor="let value of spec.values" 
+                class="option" 
+                [ngClass]="{'color-option': spec.name === 'Color', 'selected': selectedSpecs[spec.name] === value}" 
+                [ngStyle]="spec.name === 'Color' ? {'background-color': value} : {}" 
+                (click)="selectedSpecs[spec.name] = value">
+                {{ spec.name !== 'Color' ? value : '' }}
+                </button>
             </div>
-        </section>
-
-        <section class="reviews">
-            <h3>Reseñas</h3>
-            <div class="review">
-                <h4>Samantha D. ⭐⭐⭐⭐⭐</h4>
-                <p>¡Me encanta la camiseta!. Viva la sele! </p>
-                <p class="review-date">Publicado el 15 de octubre de 2024</p>
             </div>
-            <!-- Agrega más reseñas aquí -->
-        </section>
+        </div>
+        <div class="add-to-cart">
+            <div class="quantity-selector">
+                <button class="quantity-btn" aria-label="Decrease quantity" (click)="minusQuantity()">-</button>
+                <span class="quantity">{{quantity}}</span>
+                <button class="quantity-btn" aria-label="Increase quantity" (click)="plusQuantity()">+</button>
+            </div>
+            <button class="add-to-cart-btn">Agregar al carrito</button>
+        </div>
+    </div>
+</section>
+
+<section class="reviews">
+    <h3>Reseñas</h3>
+    <div class="review">
+        <h4>Samantha D. ⭐⭐⭐⭐⭐</h4>
+        <p>¡Me encanta la camiseta!. Viva la sele! </p>
+        <p class="review-date">Publicado el 15 de octubre de 2024</p>
+    </div>
+    <!-- Agrega más reseñas aquí -->
+</section>
