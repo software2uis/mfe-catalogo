@@ -25,16 +25,19 @@
         <p class="product-description">{{product?.description}}</p>
         <div class="specifications">
             <div *ngFor="let spec of product?.specifications">
-            <h2 class="section-title">Select {{ spec.name }}</h2>
-            <div class="options" [ngClass]="spec.name.toLowerCase() + '-options'">
-                <button *ngFor="let value of spec.values" 
-                class="option" 
-                [ngClass]="{'color-option': spec.name === 'Color', 'selected': selectedSpecs[spec.name] === value}" 
-                [ngStyle]="spec.name === 'Color' ? {'background-color': value} : {}" 
-                (click)="selectedSpecs[spec.name] = value">
-                {{ spec.name !== 'Color' ? value : '' }}
-                </button>
-            </div>
+                <h2 class="section-title">Select {{ spec.name }}</h2>
+                <div class="options" [ngClass]="spec.name.toLowerCase() + '-options'">
+                    <button *ngFor="let value of spec.values" 
+                            class="option" 
+                            [ngClass]="{
+                                'color-option': spec.name === 'Color',
+                                'selected': selectedSpecs[spec.name] === value
+                            }" 
+                            [ngStyle]="spec.name === 'Color' ? {'background-color': value} : {}" 
+                            (click)="spec.name === 'Color' ? selectColor(value) : selectedSpecs[spec.name] = value">
+                        {{ spec.name !== 'Color' ? value : '' }}
+                    </button>
+                </div>
             </div>
         </div>
         <div class="add-to-cart">
