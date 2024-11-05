@@ -16,7 +16,7 @@ $image-background-color: #f7f7f7;
 .product{
   display: flex;
   flex-direction: row;
-  gap: 1.75rem;
+  gap: 2remrem;
 }
 
 .product-info{
@@ -28,7 +28,7 @@ $image-background-color: #f7f7f7;
 
 .image-container{
   width: 20rem;
-  height: 18.25rem;
+  height: 22rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +38,7 @@ $image-background-color: #f7f7f7;
 
 img.resize {
   width:18rem; /* you can use % */
-  height: auto;
+  height: 20rem;
   background-color: $image-background-color;
 }
 

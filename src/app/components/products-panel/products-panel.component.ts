@@ -31,4 +31,8 @@ export class ProductsPanelComponent {
     });
   }
 
+  getMainImage(index: number): string {
+    return this.products[index].images.find(image => image.isMain)?.url || ''
+
+  }
 }
