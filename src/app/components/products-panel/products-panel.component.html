@@ -4,10 +4,10 @@
 
   @for (product of products; track $index) {
     <app-product
-    [id]="$index"
     [idMongo]="product.id"
     [name]="product.name"
     [price]="product.price"
+    [imageUrl]="getMainImage($index)"
     ></app-product>
   }
 

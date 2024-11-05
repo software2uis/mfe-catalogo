@@ -3,7 +3,7 @@
 <div class="product">
 
   <div class="image-container">
-    <img  class="resize" [src]="ProductImages[id]" alt="xd" />
+    <img  class="resize" [src]="imageUrl" alt="xd" />
   </div>
 
 
@@ -32,7 +32,7 @@
     </div>
 
 
-    <p-button [routerLink]="['/product-detail/', idMongo]" [queryParams]="{idImage: id}" label="Add to cart" />
+    <p-button [routerLink]="['/product-detail/', idMongo]" label="Add to cart" />
 
 
   </div>

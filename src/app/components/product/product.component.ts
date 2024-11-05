@@ -23,6 +23,7 @@ export class ProductComponent {
   @Input() idMongo:string = '';
   @Input() name:string = '';
   @Input() price:number = 0;
+  @Input() imageUrl:string = '';
 
   rating:number = 2.5;
 
@@ -30,8 +31,7 @@ export class ProductComponent {
 
 
   goToDetail(){
-    console.log(environment.production);
-      this.router.navigate(['/product-detail/',this.idMongo], {queryParams:{idImage:this.id}});
+      this.router.navigate(['/product-detail/',this.idMongo]);
 
   }
 
