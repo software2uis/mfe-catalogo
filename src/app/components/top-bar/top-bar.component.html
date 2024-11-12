@@ -1,12 +1,11 @@
 <p-toolbar class="layout-topbar">
   <div class="p-toolbar-group-start">
-    <span class="title">
+      <span class="title" style="cursor: pointer;" (click)="goToHome()">
       MFE-CATALOGO
-    </span>
+      </span>
   </div>
 
   <div class="p-toolbar-group-end">
-
 
 <span class="p-input-icon-left">
   <i style="top: 25%;" class="pi pi-search"></i>
@@ -17,7 +16,13 @@
   type="text"
   placeholder="Search" />
 </span>
-
+<div class="suggestions">
+  <ul>
+    <li>
+      hola
+    </li>
+  </ul>
+</div>
 
   <div class="buttons">
     <p-button [rounded]="true" [text]="true"  severity="secondary">

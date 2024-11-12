@@ -35,4 +35,8 @@ export class TopBarComponent {
     });
   }
 
+  goToHome(){
+    this.router.navigate(['/home']);
+
+  }
 }
