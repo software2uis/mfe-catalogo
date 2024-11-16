@@ -6,7 +6,7 @@
     </div>
 
     <div class="product-details">
-        <h1 class="product-title">{{product.name || ''}}</h1>
+        <h1 class="product-title">{{product?.name || ''}}</h1>
         <div class="product-rating">
             <div class="stars">
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
@@ -18,11 +18,11 @@
             <span class="rating-score">4.5/5</span>
         </div>
         <div class="product-price">
-            <span class="current-price">{{product.price  || 0 | currency}}</span>
+            <span class="current-price">{{product?.price  || 0 | currency}}</span>
             <span class="original-price">$300</span>
             <span class="discount-tag">40% off</span>
         </div>
-        <p class="product-description">{{product.description  || '' }}</p>
+        <p class="product-description">{{product?.description  || '' }}</p>
         <div class="specifications">
             <div *ngFor="let spec of product?.specifications">
                 <h2 class="section-title">Select {{ spec.name }}</h2>

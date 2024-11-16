@@ -24,30 +24,6 @@ export class HomePanelComponent {
 }
 
   ngOnInit() {
-    this.updateDataHandlerSuggestion = (event: CustomEvent) => {
-      this.productsService.getAllProductsByQuery(event.detail.query)
-      .pipe(
-        catchError((error)=>{
-          console.log('Error:', error);
-          return of([]);
-        }),
-        tap(
-          (products)=>{
-            const event = new CustomEvent('productSuggestionResponse', {
-              detail: { products: products },
-            });
-
-            window.dispatchEvent(event);
-            // this.productsService.setProducts = products.content;
-
-          }
-        )
-      ).subscribe();
-
-
-    };
-    window.addEventListener('productSuggestionRequest', this.updateDataHandlerSuggestion);
-
 
 
     this.updateDataHandlerQuery = (event: CustomEvent) => {
@@ -72,7 +48,6 @@ export class HomePanelComponent {
 
 
   ngOnDestroy() {
-    window.removeEventListener('productSuggestionRequest', this.updateDataHandlerSuggestion);
     window.removeEventListener('productsQuery', this.updateDataHandlerQuery);
 
   }
