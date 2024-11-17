@@ -1,0 +1,36 @@
+<p-splitter
+  [style]="{'min-height': '80vh ', 'margin-top': '80px'}"
+>
+  <ng-template pTemplate>
+    <div class="centering">
+      <div class="Login-component">
+        <div class="div-username">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            pInputText
+            [(ngModel)]="username"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div class="div-password">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            pInputText
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            (keyup.enter)="login()"
+          />
+        </div>
+        <div class="button-container">
+          <button pButton label="Login" class="p-button" (click)="login()">Login</button>
+          <button pButton label="Logout" class="p-button-secondary" (click)="logout()">Logout</button>
+        </div>
+        <p>{{ message }}</p>
+      </div>
+    </div>   
+  </ng-template>
+</p-splitter>

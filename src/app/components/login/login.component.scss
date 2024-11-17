@@ -1,0 +1,94 @@
+.centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .Login-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 50%;
+    padding: 20px;
+    background-color: #e9e9e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .div-username,
+    .div-password {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 400px;
+  
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+  
+      input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+  
+      input:focus {
+        outline: none;
+        border-color: #007ad9;
+        box-shadow: 0 0 5px rgba(0, 122, 217, 0.5);
+      }
+    }
+  
+    .button-container {
+        
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* Espaciado entre botones */
+      margin-top: 20px;
+  
+      button {
+        width: 100px;
+        padding: 10px;
+        font-size: 16px;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+  
+        &.p-button {
+          background-color: #a8a8a8;
+          color: white;
+          border: none;
+  
+          &:hover {
+            background-color: #6e6e6e;
+            border: #006e09 2px solid;
+          }
+        }
+  
+        &.p-button-secondary {
+          background-color: #a8a8a8;
+          color: white;
+          border: none;
+  
+          &:hover {
+            background-color: #6e6e6e;
+            border: #910000 2px solid;
+          }
+        }
+      }
+    }
+  
+    p {
+      margin-top: 15px;
+      color: #555;
+      font-size: 14px;
+    }
+  }
