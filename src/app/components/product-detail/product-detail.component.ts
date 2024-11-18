@@ -55,7 +55,7 @@ export class ProductDetailComponent implements OnInit {
   // }
 
   hasColorSpecification(): boolean {
-    return this.product.specifications.some(spec => spec.name === 'Color');
+    return this.product.specifications.some(spec => spec?.name === 'Color');
   }
 
   // Método para seleccionar el color y actualizar la imagen
