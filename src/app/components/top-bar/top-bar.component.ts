@@ -6,12 +6,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product.interface';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
   standalone: true,
-  imports: [ButtonModule, ToolbarModule, InputTextModule, IconFieldModule, InputIconModule, ],
+  imports: [ButtonModule,RouterOutlet, ToolbarModule, InputTextModule, IconFieldModule, InputIconModule, ],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss'
 })
@@ -39,7 +39,7 @@ export class TopBarComponent {
     this.router.navigate(['/home']);
 
   }
-  
+
   goToLogin(){
     this.router.navigate(['/login']);
 

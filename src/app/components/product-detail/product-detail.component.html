@@ -1,8 +1,8 @@
 <section class="product-info">
     <div class="product-images">
-        @defer (on timer(1000 ms)) {
+        <!-- @defer (on timer(1000 ms)) { -->
             <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
-        }
+        <!-- } -->
     </div>
 
     <div class="product-details">
@@ -27,13 +27,13 @@
             <div *ngFor="let spec of product?.specifications">
                 <h2 class="section-title">Select {{ spec.name }}</h2>
                 <div class="options" [ngClass]="spec.name.toLowerCase() + '-options'">
-                    <button *ngFor="let value of spec.values" 
-                            class="option" 
+                    <button *ngFor="let value of spec.values"
+                            class="option"
                             [ngClass]="{
                                 'color-option': spec.name === 'Color',
                                 'selected': selectedSpecs[spec.name] === value
-                            }" 
-                            [ngStyle]="spec.name === 'Color' ? {'background-color': value} : {}" 
+                            }"
+                            [ngStyle]="spec.name === 'Color' ? {'background-color': value} : {}"
                             (click)="spec.name === 'Color' ? selectColor(value) : selectedSpecs[spec.name] = value">
                         {{ spec.name !== 'Color' ? value : '' }}
                     </button>
