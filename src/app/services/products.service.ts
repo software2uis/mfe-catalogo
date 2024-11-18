@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { ResponsePaginated } from '../models/paginate.interface';
 import { Product } from '../models/product.interface';
 import { BehaviorSubject } from 'rxjs';
+import { ProductFilterDTO } from '../models/product-filter.interface';
 
 @Injectable({providedIn: 'root'})
 export class ProductsService {
@@ -22,9 +23,8 @@ export class ProductsService {
 
   getAllProductsByQuery(query?:string) {
 
-    const params = query ? new HttpParams().set('query',query) : {};
-
-    return this.http.get<ResponsePaginated>(environment.baseUrl  + '/public/api/products',{params})
+    const productFilterDTO = {query} as ProductFilterDTO;
+    return this.http.post<ResponsePaginated>(environment.baseUrl  + '/public/api/products', productFilterDTO)
   }
 
   getProductById(id:string) {

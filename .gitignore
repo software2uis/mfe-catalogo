@@ -29,6 +29,7 @@ modules/.settings
 modules/.vscode
 .vimrc
 .nvimrc
+package-lock.json
 
 # Don't check in secret files
 *secret.js

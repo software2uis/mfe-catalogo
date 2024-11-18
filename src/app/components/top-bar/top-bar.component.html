@@ -1,12 +1,11 @@
 <p-toolbar class="layout-topbar">
   <div class="p-toolbar-group-start">
-    <span class="title">
+      <span class="title" style="cursor: pointer;" (click)="goToHome()">
       MFE-CATALOGO
-    </span>
+      </span>
   </div>
 
   <div class="p-toolbar-group-end">
-
 
 <span class="p-input-icon-left">
   <i style="top: 25%;" class="pi pi-search"></i>
@@ -18,7 +17,6 @@
   placeholder="Search" />
 </span>
 
-
   <div class="buttons">
     <p-button [rounded]="true" [text]="true"  severity="secondary">
       <span class="material-symbols-outlined">
@@ -27,7 +25,7 @@
     </p-button>
 
     <p-button [rounded]="true" [text]="true"  severity="secondary">
-      <span class="material-symbols-outlined">
+      <span class="material-symbols-outlined" style="cursor: pointer;" (click)="goToLogin()">
         account_circle
       </span>
     </p-button>
