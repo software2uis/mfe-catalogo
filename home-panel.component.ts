@@ -21,11 +21,18 @@ import { ProductsService } from '../../services/products.service';
 export class HomePanelComponent {
   productsService: ProductsService = inject(ProductsService);
 
-  onFiltersChanged(query: string) {
-    console.log('Filters changed:', query);
-    this.productsService.getAllProductsByQuery(query).subscribe((response) => {
-      this.productsService.setProducts = response.content;
-      console.log('Products:', this.productsService.getProducts);
-    });
+  onFiltersChanged(filters: {
+    query: string;
+    minPrice?: string;
+    maxPrice?: string;
+  }) {
+    const { query, minPrice, maxPrice } = filters;
+
+    this.productsService
+      .getAllProductsByQuery(query, minPrice, maxPrice)
+      .subscribe((response) => {
+        this.productsService.setProducts = response.content;
+        console.log('Products:', this.productsService.getProducts);
+      });
   }
 }

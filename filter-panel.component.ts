@@ -3,6 +3,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+interface Filters {
+  category: string;
+  minPrice: number | null;
+  maxPrice: number | null;
+  rating: number | null;
+}
+
 @Component({
   selector: 'app-filter-panel',
   standalone: true,
@@ -10,39 +17,43 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './filter-panel.component.html',
 })
 export class FilterPanelComponent {
-  filters = {
-    category: '', // Filtro por categoría
-    minPrice: null, // Filtro por precio mínimo
-    maxPrice: null, // Filtro por precio máximo
-    rating: null, // Filtro por calificación de 1 a 5
+  filters: Filters = {
+    category: '',
+    minPrice: null,
+    maxPrice: null,
+    rating: null,
   };
 
-  @Output() filtersChanged = new EventEmitter<string>();
+  @Output() filtersChanged = new EventEmitter<{
+    query: string;
+    minPrice?: string;
+    maxPrice?: string;
+  }>();
 
   applyFilters() {
     const queryParams = [];
 
-    // Añadir filtro de categoría si existe
     if (this.filters.category) {
       queryParams.push(`category=${this.filters.category}`);
     }
 
-    // Añadir filtro de precio mínimo si existe
-    if (this.filters.minPrice !== null) {
-      queryParams.push(`price[gte]=${this.filters.minPrice}`); // >= minPrice
-    }
-
-    // Añadir filtro de precio máximo si existe
-    if (this.filters.maxPrice !== null) {
-      queryParams.push(`price[lte]=${this.filters.maxPrice}`); // <= maxPrice
-    }
-
-    // Añadir filtro de calificación si existe
     if (this.filters.rating !== null) {
       queryParams.push(`rating=${this.filters.rating}`);
     }
 
     const query = queryParams.join('&');
-    this.filtersChanged.emit(query);
+
+    // Emitir filtros con `null` convertido a `undefined`
+    this.filtersChanged.emit({
+      query,
+      minPrice:
+        this.filters.minPrice !== null
+          ? this.filters.minPrice.toString()
+          : undefined,
+      maxPrice:
+        this.filters.maxPrice !== null
+          ? this.filters.maxPrice.toString()
+          : undefined,
+    });
   }
 }
