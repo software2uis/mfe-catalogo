@@ -1,5 +1,4 @@
-
-$image-background-color: #f7f7f7;
+$image-background-color: #ffffff;
 
 .pi.pi-star-fill{
   color: var(--yellow-300);
@@ -24,6 +23,7 @@ $image-background-color: #f7f7f7;
   flex-direction: column;
   padding: 2rem 0rem 2rem 0rem;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .image-container{
@@ -46,4 +46,98 @@ img.resize {
   font-size: 1.5rem;
   font-weight: 700;
   font-family: monospace;
+}
+
+.product-container {
+  display: flex;
+  max-width: 295px;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 450px; /* Set a fixed height for all product cards */
+}
+
+.product-image-container {
+  border-radius: 20px;
+  background: $image-background-color;
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  aspect-ratio: 1;
+  padding: 0 1px;
+  height: 60%; /* Set a fixed height for the image container */
+  transition: transform 0.3s ease; /* Add transition for smooth effect */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.product-image-container:hover {
+  transform: scale(1.05); /* Scale up the image container on hover */
+}
+
+.product-image {
+  aspect-ratio: 0.99;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%; /* Ensure the image fills the container */
+}
+
+.product-title {
+  color: #000;
+  margin: 16px 0 0;
+  font: 700 20px Satoshi, sans-serif;
+  cursor: pointer; /* Add this line to change the cursor */
+}
+
+.rating-container {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  gap: 13px;
+}
+
+.star-rating {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: auto 0;
+}
+
+.star-icon {
+  aspect-ratio: 0.95;
+  object-fit: contain;
+  object-position: center;
+  width: 18px;
+}
+
+.star-half {
+  aspect-ratio: 0.53;
+  object-fit: contain;
+  object-position: center;
+  width: 9px;
+}
+
+.rating-text {
+  color: rgba(0, 0, 0, 0.7);
+  margin: auto 0;
+  font: 400 14px Satoshi, sans-serif;
+}
+
+.rating-max {
+  color: #000;
+  font-size: 14px; /* Match the font size of rating-text */
+}
+
+.product-price {
+  color: #000;
+  margin: 8px 0 0;
+  font: 700 24px Satoshi, sans-serif;
+  display: inline-block;
+}
+
+p-button {
+  display: inline-block;
+  margin-right: 10px;
 }
