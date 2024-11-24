@@ -28,7 +28,7 @@ export class HomePanelComponent {
       this.productsService.getAllProductsByQuery(event.detail.query)
       .pipe(
         tap(
-          (products:ResponsePaginated  )=>{
+          (products:ResponsePaginated<any> )=>{
 
           this.productsService.setProducts = products.content;
 
