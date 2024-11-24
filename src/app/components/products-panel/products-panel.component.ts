@@ -16,23 +16,26 @@ import { ProductComponent } from '../product/product.component';
 export class ProductsPanelComponent {
 
   products: Product[] = [];
+  totalPages: number = 0;
+  currentPage: number = 0;
 
   productsService: ProductsService = inject(ProductsService);
 
   ngOnInit() {
-
-
-    this.productsService.getAllProductsByQuery().subscribe((products) => {
-      this.productsService.setProducts = products.content;
-    });
-
     this.productsService.getProducts.subscribe((products) => {
       this.products = products;
     });
+    this.productsService.getTotalPages.subscribe(totalPages => this.totalPages = totalPages);
+    this.productsService.getCurrentPage.subscribe(currentPage => this.currentPage = currentPage);
+    this.loadPage(this.currentPage);
   }
 
-  getMainImage(index: number): string {
-    return this.products[index].images.find(image => image.isMain)?.url || ''
+  loadPage(page: number) {
+    this.currentPage = page;
+    this.productsService.getAllProductsByQuery('', page).subscribe();
+  }
 
+  getMainImage(product: Product): string {
+    return product.images.find((image) => image.isMain)?.url || '';
   }
 }
