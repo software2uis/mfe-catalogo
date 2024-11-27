@@ -11,6 +11,11 @@
   flex-direction: column;
   align-items: center; /* Center the product container */
   flex: 1 1 295px; /* Set a fixed flex-basis */
+  :hover{
+    background: #F2F2F2; /* Add a hover effect background color */
+    transform: scale(1.02); /* Add a slight hover effect */
+    transition: transform 0.2s ease-in-out; /* Apply transition */
+  }
 }
 
 @media (min-width: 1680px) {

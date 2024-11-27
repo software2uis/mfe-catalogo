@@ -1,0 +1,82 @@
+/* Panel de filtros */
+.filter-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 0; /* Elimina bordes redondeados para ocupar todo */
+    box-shadow: none; /* Elimina la sombra */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    font-family: Arial, sans-serif;
+}
+  
+  /* Etiquetas */
+  .filter-panel label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  /* Selects */
+  .filter-panel select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .filter-panel select:focus {
+    border-color: #5eacff;
+  }
+  
+  /* Inputs */
+  .filter-panel input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .filter-panel input[type="number"]:focus {
+    border-color: #007bff;
+  }
+  
+  /* Botón */
+  .filter-panel button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .filter-panel button:hover {
+    background-color: #0056b3;
+  }
+  
+  .filter-panel button:active {
+    background-color: #003f7f;
+  }
+  
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+        .filter-panel {
+            padding: 1rem;
+        }
+    }
