@@ -1,5 +1,165 @@
-.list-products{
+.list-products {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem; /* Further reduce the gap between products */
+  justify-content: center; /* Center the products to avoid excessive space on the right */
+}
+
+.product-container {
+  display: flex;
+  max-width: 295px; /* Set a fixed max-width */
   flex-direction: column;
+  align-items: center; /* Center the product container */
+  flex: 1 1 295px; /* Set a fixed flex-basis */
+  :hover{
+    background: #F2F2F2; /* Add a hover effect background color */
+    transform: scale(1.02); /* Add a slight hover effect */
+    transition: transform 0.2s ease-in-out; /* Apply transition */
+  }
+}
+
+@media (min-width: 1680px) {
+  .product-container {
+    max-width: calc(33.333% - 0.25rem); /* Ensure a maximum of 3 products per row */
+    flex: 1 1 calc(33.333% - 0.25rem); /* Ensure a maximum of 3 products per row */
+  }
+}
+
+.product-image-container {
+  border-radius: 20px;
+  background: #F0EEED;
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center; /* Center the image container */
+  aspect-ratio: 1;
+  padding: 0 1px;
+}
+
+.product-image {
+  aspect-ratio: 0.99;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
+
+.product-title {
+  color: #000;
+  margin: 16px 0 0;
+  font: 700 20px Satoshi, sans-serif;
+}
+
+.rating-container {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  gap: 13px;
+}
+
+.star-rating {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: auto 0;
+}
+
+.star-icon {
+  aspect-ratio: 0.95;
+  object-fit: contain;
+  object-position: center;
+  width: 18px;
+}
+
+.star-half {
+  aspect-ratio: 0.53;
+  object-fit: contain;
+  object-position: center;
+  width: 9px;
+}
+
+.rating-text {
+  color: rgba(0, 0, 0, 0.7);
+  margin: auto 0;
+  font: 400 14px Satoshi, sans-serif;
+}
+
+.rating-max {
+  color: #000;
+}
+
+.product-price {
+  color: #000;
+  margin: 8px 0 0;
+  font: 700 24px Satoshi, sans-serif;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.pagination-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* Corrected property name */
+  border-radius: 0.375rem;
+  font-size: 0.875rem; /* Corrected property name */
+  font-weight: 500; /* Corrected property name */
+  transition: all 0.2s;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  color: #000;
+  background-color: #f8f9fa;
+}
+
+.pagination-button:hover {
+  background-color: #e2e6ea;
+}
+
+.pagination-button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pagination-list {
+  display: flex;
   gap: 0.5rem;
+  list-style: none; /* Remove list item markers */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.pagination-list a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  font-size: 0.875rem; /* Corrected property name */
+  font-weight: 500; /* Corrected property name */
+  transition: all 0.2s;
+  width: 2.25rem;
+  height: 2.25rem;
+  cursor: pointer;
+  color: #000;
+  background-color: #ffffff; /* Set background to white for non-current pages */
+}
+
+.pagination-list a:hover {
+  background-color: #e2e6ea;
+}
+
+.pagination-list a.active {
+  background-color: #d0d0d0; /* Make the active page color a bit darker */
+  color: #000;
+}
+
+.pagination-button span {
+  margin-left: 0.5rem; /* Add margin to the left of the span */
+  margin-right: 0.5rem; /* Add margin to the right of the span */
 }
