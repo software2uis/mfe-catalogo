@@ -1,13 +1,13 @@
-// src/app/components/filter-panel/filter-panel.component.ts
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductsService } from '../../services/products.service'; // Importa el servicio para acceder a los productos
 
 interface Filters {
   category: string;
-  minPrice: number | null;
-  maxPrice: number | null;
-  rating: number | null;
+  minPrice: number;
+  maxPrice: number;
+  rating: number;
 }
 
 @Component({
@@ -15,46 +15,39 @@ interface Filters {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './filter-panel.component.html',
-  styleUrl: './filter-panel.component.scss',
+  styleUrls: ['./filter-panel.component.scss'],
 })
 export class FilterPanelComponent {
   filters: Filters = {
-    category: '',
-    minPrice: null,
-    maxPrice: null,
-    rating: null,
+    category: '', // El valor predeterminado es vacío
+    minPrice: 0,
+    maxPrice: 0,
+    rating: 0,
   };
 
   @Output() filtersChanged = new EventEmitter<{
-    query: string;
-    minPrice?: string;
-    maxPrice?: string;
+    query: string; // Este es el filtro que se emite al componente padre
   }>();
 
+  constructor(private productsService: ProductsService) {}
+
+  // Método para aplicar filtros
   applyFilters() {
-    const queryParams = [];
-
+    // Si se ha seleccionado una categoría
     if (this.filters.category) {
-      queryParams.push(`category=${this.filters.category}`);
+      // Emitir el filtro de categoría
+      this.filtersChanged.emit({ query: this.filters.category });
+
+      // Llamar al servicio para obtener los productos filtrados por la categoría
+      this.productsService.getProductsByCategory(this.filters.category).subscribe({
+        next: (response) => {
+          console.log('Productos filtrados por categoría:', response);
+          // Aquí puedes manejar el resultado de los productos si lo necesitas
+        },
+        error: (error) => {
+          console.error('Error al obtener productos:', error);
+        },
+      });
     }
-
-    if (this.filters.rating !== null) {
-      queryParams.push(`rating=${this.filters.rating}`);
-    }
-
-    const query = queryParams.join('&');
-
-    // Emitir filtros con `null` convertido a `undefined`
-    this.filtersChanged.emit({
-      query,
-      minPrice:
-        this.filters.minPrice !== null
-          ? this.filters.minPrice.toString()
-          : undefined,
-      maxPrice:
-        this.filters.maxPrice !== null
-          ? this.filters.maxPrice.toString()
-          : undefined,
-    });
   }
 }
