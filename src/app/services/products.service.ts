@@ -56,4 +56,19 @@ export class ProductsService {
   getProductById(id: string) {
     return this.http.get<Product>(`${environment.baseUrl}/public/api/products/${id}`);
   }
+  getProductsByCategory(category: string) {
+    const body = {
+      categoryName: category, // Filtro por categoría
+    };
+  
+    return this.http.post<ResponsePaginated<Product>>(
+      `${environment.baseUrl}/public/api/products`,
+      body
+    ).pipe(
+      tap((response) => {
+        this.totalPagesSubject.next(response.totalPages); // Actualiza el total de páginas si es necesario
+        this.setProducts = response.content; // Actualiza los productos filtrados
+      })
+    );
+  }
 }
