@@ -6,9 +6,11 @@ import { Product } from '../models/product.interface';
 import { BehaviorSubject } from 'rxjs';
 import { ProductFilterDTO } from '../models/product-filter.interface';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
+  apiUrl = `${environment.baseUrl}/public/api/products`;
   private http = inject(HttpClient);
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private totalPagesSubject = new BehaviorSubject<number>(0);
@@ -58,7 +60,7 @@ export class ProductsService {
   }
   getProductsByCategory(category: string) {
     const body = {
-      categoryName: category, // Filtro por categoría
+      categoryName: category, 
     };
   
     return this.http.post<ResponsePaginated<Product>>(
@@ -66,9 +68,47 @@ export class ProductsService {
       body
     ).pipe(
       tap((response) => {
-        this.totalPagesSubject.next(response.totalPages); // Actualiza el total de páginas si es necesario
-        this.setProducts = response.content; // Actualiza los productos filtrados
+        this.totalPagesSubject.next(response.totalPages); 
+        this.setProducts = response.content; 
       })
     );
   }
+  getProductsByRating(rating: number) {
+    const body = {
+      score: rating, 
+    };
+  
+    return this.http.post<ResponsePaginated<Product>>(
+      `${environment.baseUrl}/public/api/products`,
+      body
+    ).pipe(
+      tap((response) => {
+        this.totalPagesSubject.next(response.totalPages); 
+        this.setProducts = response.content; 
+      })
+    );
+  }
+  
+  // Método combinado para obtener productos por categoría y rating
+  // Lo ideal sería al final combinar todos los filtros en un solo método del servicio !!!!!!
+
+  getProductsByCategoryAndRating(category: string, rating: number) {
+    const body = {
+      categoryName: category, 
+      score: rating, 
+    };
+  
+    return this.http.post<ResponsePaginated<Product>>(
+      `${environment.baseUrl}/public/api/products`,
+      body
+    ).pipe(
+      tap((response) => {
+        this.totalPagesSubject.next(response.totalPages);
+        this.setProducts = response.content;
+      })
+    );
+  }
+
+
 }
+
