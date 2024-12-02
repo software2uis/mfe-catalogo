@@ -1,3 +1,4 @@
+import { Category } from './../../models/product.interface';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -52,21 +53,42 @@ export class FilterPanelComponent {
       combinedFilters.maxPrice = this.filters.maxPrice;
     }
 
-
     // Llamar al servicio para obtener los productos filtrados por categoría y rating
     // Lo ideal sería al final combinar todos los filtros en un solo método del servicio !!!!!!
-    if (combinedFilters.categoryName || combinedFilters.score) {
-      this.productsService.getProductsByCategoryAndRating(
-        combinedFilters.categoryName,
-        combinedFilters.score
-      ).subscribe({
-        next: (response) => {
-          console.log('Productos filtrados:', response);
-        },
-        error: (error) => {
-          console.error('Error al obtener productos:', error);
-        },
-      });
+    if (
+      combinedFilters.categoryName ||
+      combinedFilters.score ||
+      combinedFilters.minPrice ||
+      combinedFilters.maxPrice
+    ) {
+      // this.productsService
+      //   .getProductsByCategoryAndRating(
+      //     combinedFilters.categoryName,
+      //     combinedFilters.score
+      //   )
+      //   .subscribe({
+      //     next: (response) => {
+      //       console.log('Productos filtrados:', response);
+      //     },
+      //     error: (error) => {
+      //       console.error('Error al obtener productos:', error);
+      //     },
+      //   });
+      this.productsService
+        .getProductsByFilters(
+          combinedFilters.categoryName,
+          combinedFilters.score,
+          combinedFilters.minPrice,
+          combinedFilters.maxPrice
+        )
+        .subscribe({
+          next: (response) => {
+            console.log('Productos filtrados:', response);
+          },
+          error: (error) => {
+            console.error('Error al obtener productos:', error);
+          },
+        });
     }
   }
 }

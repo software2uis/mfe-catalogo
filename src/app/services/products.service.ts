@@ -36,79 +36,116 @@ export class ProductsService {
     return this.currentPageSubject.asObservable();
   }
 
-  getAllProductsByQuery(query: string = '', page: number = 0, size: number = 6) {
+  getAllProductsByQuery(
+    query: string = '',
+    page: number = 0,
+    size: number = 6
+  ) {
     this.setCurrentPage = page;
     const productFilterDTO: ProductFilterDTO = { query };
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.post<ResponsePaginated<Product>>(
-      `${environment.baseUrl}/public/api/products`,
-      productFilterDTO,
-      { params }
-    ).pipe(
-      tap(response => {
-        this.totalPagesSubject.next(response.totalPages);
-        this.setProducts = response.content;
-      })
-    );
+    return this.http
+      .post<ResponsePaginated<Product>>(
+        `${environment.baseUrl}/public/api/products`,
+        productFilterDTO,
+        { params }
+      )
+      .pipe(
+        tap((response) => {
+          this.totalPagesSubject.next(response.totalPages);
+          this.setProducts = response.content;
+        })
+      );
   }
 
   getProductById(id: string) {
-    return this.http.get<Product>(`${environment.baseUrl}/public/api/products/${id}`);
+    return this.http.get<Product>(
+      `${environment.baseUrl}/public/api/products/${id}`
+    );
   }
   getProductsByCategory(category: string) {
     const body = {
-      categoryName: category, 
+      categoryName: category,
     };
-  
-    return this.http.post<ResponsePaginated<Product>>(
-      `${environment.baseUrl}/public/api/products`,
-      body
-    ).pipe(
-      tap((response) => {
-        this.totalPagesSubject.next(response.totalPages); 
-        this.setProducts = response.content; 
-      })
-    );
+
+    return this.http
+      .post<ResponsePaginated<Product>>(
+        `${environment.baseUrl}/public/api/products`,
+        body
+      )
+      .pipe(
+        tap((response) => {
+          this.totalPagesSubject.next(response.totalPages);
+          this.setProducts = response.content;
+        })
+      );
   }
   getProductsByRating(rating: number) {
     const body = {
-      score: rating, 
+      score: rating,
     };
-  
-    return this.http.post<ResponsePaginated<Product>>(
-      `${environment.baseUrl}/public/api/products`,
-      body
-    ).pipe(
-      tap((response) => {
-        this.totalPagesSubject.next(response.totalPages); 
-        this.setProducts = response.content; 
-      })
-    );
+
+    return this.http
+      .post<ResponsePaginated<Product>>(
+        `${environment.baseUrl}/public/api/products`,
+        body
+      )
+      .pipe(
+        tap((response) => {
+          this.totalPagesSubject.next(response.totalPages);
+          this.setProducts = response.content;
+        })
+      );
   }
-  
+
   // Método combinado para obtener productos por categoría y rating
   // Lo ideal sería al final combinar todos los filtros en un solo método del servicio !!!!!!
 
   getProductsByCategoryAndRating(category: string, rating: number) {
     const body = {
-      categoryName: category, 
-      score: rating, 
+      categoryName: category,
+      score: rating,
     };
-  
-    return this.http.post<ResponsePaginated<Product>>(
-      `${environment.baseUrl}/public/api/products`,
-      body
-    ).pipe(
-      tap((response) => {
-        this.totalPagesSubject.next(response.totalPages);
-        this.setProducts = response.content;
-      })
-    );
+
+    return this.http
+      .post<ResponsePaginated<Product>>(
+        `${environment.baseUrl}/public/api/products`,
+        body
+      )
+      .pipe(
+        tap((response) => {
+          this.totalPagesSubject.next(response.totalPages);
+          this.setProducts = response.content;
+        })
+      );
   }
 
+  getProductsByFilters(
+    Category: string,
+    rating: number,
+    minPrice: number,
+    maxPrice: number
+  ) {
+    const body = {
+      categoryName: Category,
+      score: rating,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+    };
 
+    return this.http
+      .post<ResponsePaginated<Product>>(
+        `${environment.baseUrl}/public/api/products`,
+        body
+      )
+      .pipe(
+        tap((response) => {
+          this.totalPagesSubject.next(response.totalPages);
+          this.setProducts = response.content;
+        })
+      );
+  }
 }
-
