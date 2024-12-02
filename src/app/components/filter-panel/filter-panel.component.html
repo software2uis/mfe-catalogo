@@ -2,7 +2,10 @@
   <!-- Filtro de categoría -->
   <div>
     <label for="category">Categoría:</label>
-    <select id="category" [(ngModel)]="filters.category">
+    <select
+    pInputText
+
+    id="category" [(ngModel)]="filters.category">
       <option value="">Seleccione una categoría</option>
       <option value="Shirts">Camisas</option>
       <option value="Electronics">Electrónica</option>
@@ -16,7 +19,10 @@
     <label for="minPrice">Precio Mínimo:</label>
     <input
       id="minPrice"
-      type="number"
+      pInputText
+      oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+      minlength="0"
+      maxlength="6"
       [(ngModel)]="filters.minPrice"
       placeholder="Ingrese precio mínimo"
     />
@@ -26,8 +32,11 @@
   <div>
     <label for="maxPrice">Precio Máximo:</label>
     <input
+      pInputText
       id="maxPrice"
-      type="number"
+      oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+      minlength="0"
+      maxlength="6"
       [(ngModel)]="filters.maxPrice"
       placeholder="Ingrese precio máximo"
     />
@@ -36,7 +45,9 @@
   <!-- Filtro de rating -->
   <div>
     <label for="rating">Calificación (1-5):</label>
-    <select id="rating" [(ngModel)]="filters.rating">
+    <select
+    pInputText
+    id="rating" [(ngModel)]="filters.rating">
       <option value="">Seleccione calificación</option>
       <option value="1">1</option>
       <option value="2">2</option>

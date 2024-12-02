@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.interface';
 import { Store } from '@ngrx/store';
 import { ProductComponent } from '../product/product.component';
+import { ProductFilterDTO } from '../../models/product-filter.interface';
 
 @Component({
   selector: 'app-products-panel',
@@ -18,6 +19,7 @@ export class ProductsPanelComponent {
   products: Product[] = [];
   totalPages: number = 0;
   currentPage: number = 0;
+  filters :ProductFilterDTO ={};
 
   productsService: ProductsService = inject(ProductsService);
 
@@ -27,12 +29,15 @@ export class ProductsPanelComponent {
     });
     this.productsService.getTotalPages.subscribe(totalPages => this.totalPages = totalPages);
     this.productsService.getCurrentPage.subscribe(currentPage => this.currentPage = currentPage);
+      this.productsService.getProductFilterDTO.subscribe((filters)=>{
+        this.filters = filters;});
+
     this.loadPage(this.currentPage);
   }
 
   loadPage(page: number) {
     this.currentPage = page;
-    this.productsService.getAllProductsByQuery('', page).subscribe();
+    this.productsService.getAllProductsByQuery('',this.filters,page).subscribe();
   }
 
   getMainImage(product: Product): string {

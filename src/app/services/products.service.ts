@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ResponsePaginated } from '../models/paginate.interface';
 import { Product } from '../models/product.interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductFilterDTO } from '../models/product-filter.interface';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ export class ProductsService {
   apiUrl = `${environment.baseUrl}/public/api/products`;
   private http = inject(HttpClient);
   private productsSubject = new BehaviorSubject<Product[]>([]);
+  private productFilterDTO = new Subject<ProductFilterDTO>();
   private totalPagesSubject = new BehaviorSubject<number>(0);
   private currentPageSubject = new BehaviorSubject<number>(0);
 
@@ -36,13 +37,22 @@ export class ProductsService {
     return this.currentPageSubject.asObservable();
   }
 
+  set setProductFilterDTO(productFilter:ProductFilterDTO){
+    this.productFilterDTO.next(productFilter);
+  }
+
+  get getProductFilterDTO(){
+    return this.productFilterDTO.asObservable();
+  }
+
   getAllProductsByQuery(
     query: string = '',
+    productFilterDTO?: ProductFilterDTO,
     page: number = 0,
     size: number = 6
   ) {
     this.setCurrentPage = page;
-    const productFilterDTO: ProductFilterDTO = { query };
+    const filter: ProductFilterDTO = { query, ...productFilterDTO };
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
@@ -50,7 +60,7 @@ export class ProductsService {
     return this.http
       .post<ResponsePaginated<Product>>(
         `${environment.baseUrl}/public/api/products`,
-        productFilterDTO,
+        filter,
         { params }
       )
       .pipe(
@@ -136,10 +146,15 @@ export class ProductsService {
       maxPrice: maxPrice,
     };
 
+    const params = new HttpParams()
+    .set('page', 0)
+    .set('size', 6);
+
     return this.http
       .post<ResponsePaginated<Product>>(
         `${environment.baseUrl}/public/api/products`,
-        body
+        body,
+        {params}
       )
       .pipe(
         tap((response) => {
