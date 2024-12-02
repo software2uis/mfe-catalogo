@@ -3,24 +3,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service'; // Importa el servicio para acceder a los productos
+import { ProductFilterDTO } from '../../models/product-filter.interface';
+import { InputTextModule } from 'primeng/inputtext';
 
-interface Filters {
-  category: string;
-  minPrice: number;
-  maxPrice: number;
-  rating: number;
-  query?: string;
-}
+
 
 @Component({
   selector: 'app-filter-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, InputTextModule, FormsModule],
   templateUrl: './filter-panel.component.html',
   styleUrls: ['./filter-panel.component.scss'],
 })
 export class FilterPanelComponent {
-  filters: Filters = {
+  filters: ProductFilterDTO = {
     category: '',
     minPrice: 0,
     maxPrice: 0,
@@ -28,9 +24,10 @@ export class FilterPanelComponent {
     query: '',
   };
 
-  @Output() filtersChanged = new EventEmitter<Filters>();
+  @Output() filtersChanged = new EventEmitter<ProductFilterDTO>();
 
   constructor(private productsService: ProductsService) {}
+
 
   // Método para aplicar los filtros combinados
   applyFilters() {
@@ -41,15 +38,15 @@ export class FilterPanelComponent {
       combinedFilters.categoryName = this.filters.category;
     }
 
-    if (this.filters.rating > 0) {
+    if (!!this.filters.rating) {
       combinedFilters.score = this.filters.rating;
     }
 
-    if (this.filters.minPrice > 0) {
+    if (!!this.filters.minPrice) {
       combinedFilters.minPrice = this.filters.minPrice;
     }
 
-    if (this.filters.maxPrice > 0) {
+    if (!!this.filters.maxPrice) {
       combinedFilters.maxPrice = this.filters.maxPrice;
     }
 
@@ -84,6 +81,8 @@ export class FilterPanelComponent {
         .subscribe({
           next: (response) => {
             console.log('Productos filtrados:', response);
+            this.productsService.setProductFilterDTO = combinedFilters;
+            this.productsService.setCurrentPage = 0;
           },
           error: (error) => {
             console.error('Error al obtener productos:', error);
