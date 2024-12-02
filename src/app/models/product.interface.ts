@@ -11,6 +11,7 @@ export interface Product {
   name:           string;
   description:    string;
   price:          number;
+  score:          number;
   images:         ProductImage[];
   specifications: Specification[];
 }

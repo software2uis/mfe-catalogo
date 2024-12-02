@@ -21,8 +21,7 @@ export class ProductComponent {
   @Input() name: string = '';
   @Input() price: number = 0;
   @Input() imageUrl: string = '';
-
-  rating: number = 2.5;
+  @Input() rating: number = 0;
 
   ProductImages = ProductImages;
 
