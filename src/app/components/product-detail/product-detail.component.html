@@ -1,10 +1,8 @@
 <section class="product-info">
     <div class="product-images">
-        <!-- @defer (on timer(1000 ms)) { -->
-            <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
-        <!-- } -->
+        <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
     </div>
-
+  
     <div class="product-details">
         <h1 class="product-title">{{product?.name || ''}}</h1>
         <div class="product-rating">
@@ -19,10 +17,8 @@
         </div>
         <div class="product-price">
             <span class="current-price">{{product?.price  || 0 | currency}}</span>
-            <span class="original-price">$300</span>
-            <span class="discount-tag">40% off</span>
         </div>
-        <p class="product-description">{{product?.description  || '' }}</p>
+        <p class="product-description">Especificaciones técnicas: {{ product?.description || '' }}</p>
         <div class="specifications">
             <div *ngFor="let spec of product?.specifications">
                 <h2 class="section-title">Select {{ spec.name }}</h2>
@@ -46,17 +42,11 @@
                 <span class="quantity">{{quantity}}</span>
                 <button class="quantity-btn" aria-label="Increase quantity" (click)="plusQuantity()">+</button>
             </div>
-            <button class="add-to-cart-btn">Agregar al carrito</button>
+            <button class="add-to-cart-btn" (click)="addToCart()">añadir producto a carrito de compras</button>
+            <div *ngIf="successMessage" class="success-message">
+              {{ successMessage }}
+            </div>
         </div>
     </div>
-</section>
-
-<section class="reviews">
-    <h3>Reseñas</h3>
-    <div class="review">
-        <h4>Samantha D. ⭐⭐⭐⭐⭐</h4>
-        <p>¡Me encanta la camiseta!. Viva la sele! </p>
-        <p class="review-date">Publicado el 15 de octubre de 2024</p>
-    </div>
-    <!-- Agrega más reseñas aquí -->
-</section>
+  </section>
+  

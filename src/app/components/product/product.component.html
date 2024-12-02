@@ -1,20 +1,23 @@
 <div class="product-container">
   <div class="product-image-container" (click)="goToDetail()">
-    <img class="product-image" [src]="imageUrl" alt="{{name}}" />
+    <img class="product-image" [src]="imageUrl" alt="{{ name }}" />
   </div>
   <div class="product-info">
-    <h3 class="product-title" (click)="goToDetail()">{{name}}</h3>
+    <h3 class="product-title" (click)="goToDetail()">{{ name }}</h3>
     <div class="rating-container">
       <div class="star-rating">
-        <ng-container *ngFor="let item of [1,2,3,4,5]; let i = index">
+        <ng-container *ngFor="let item of [1, 2, 3, 4, 5]; let i = index">
           <i *ngIf="rating >= item" class="pi pi-star-fill star-icon"></i>
           <i *ngIf="rating < item && rating >= item - 1" class="pi pi-star-half-fill star-half"></i>
         </ng-container>
       </div>
-      <span class="rating-text">{{rating}}<span class="rating-max">/5</span></span>
+      <span class="rating-text">{{ rating }}<span class="rating-max">/5</span></span>
     </div>
-    <span class="product-price">{{price | currency}}</span>
+    <span class="product-price">{{ price | currency }}</span>
     <div style="margin-bottom: 8px;"></div>
-    <p-button [routerLink]="['/product-detail/', idMongo]" label="Add to cart"></p-button>
+    <p-button label="Add to cart" (click)="addToCart()"></p-button>
   </div>
 </div>
+
+
+
