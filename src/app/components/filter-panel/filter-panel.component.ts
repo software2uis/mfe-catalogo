@@ -8,6 +8,7 @@ interface Filters {
   minPrice: number;
   maxPrice: number;
   rating: number;
+  query?: string;
 }
 
 @Component({
@@ -19,30 +20,48 @@ interface Filters {
 })
 export class FilterPanelComponent {
   filters: Filters = {
-    category: '', // El valor predeterminado es vacío
+    category: '',
     minPrice: 0,
     maxPrice: 0,
-    rating: 0,
+    rating: 0, // 0-5
+    query: '',
   };
 
-  @Output() filtersChanged = new EventEmitter<{
-    query: string; // Este es el filtro que se emite al componente padre
-  }>();
+  @Output() filtersChanged = new EventEmitter<Filters>();
 
   constructor(private productsService: ProductsService) {}
 
-  // Método para aplicar filtros
+  // Método para aplicar los filtros combinados
   applyFilters() {
-    // Si se ha seleccionado una categoría
-    if (this.filters.category) {
-      // Emitir el filtro de categoría
-      this.filtersChanged.emit({ query: this.filters.category });
+    // Crear un objeto de filtros combinado
+    const combinedFilters: any = {};
 
-      // Llamar al servicio para obtener los productos filtrados por la categoría
-      this.productsService.getProductsByCategory(this.filters.category).subscribe({
+    if (this.filters.category) {
+      combinedFilters.categoryName = this.filters.category;
+    }
+
+    if (this.filters.rating > 0) {
+      combinedFilters.score = this.filters.rating;
+    }
+
+    if (this.filters.minPrice > 0) {
+      combinedFilters.minPrice = this.filters.minPrice;
+    }
+
+    if (this.filters.maxPrice > 0) {
+      combinedFilters.maxPrice = this.filters.maxPrice;
+    }
+
+
+    // Llamar al servicio para obtener los productos filtrados por categoría y rating
+    // Lo ideal sería al final combinar todos los filtros en un solo método del servicio !!!!!!
+    if (combinedFilters.categoryName || combinedFilters.score) {
+      this.productsService.getProductsByCategoryAndRating(
+        combinedFilters.categoryName,
+        combinedFilters.score
+      ).subscribe({
         next: (response) => {
-          console.log('Productos filtrados por categoría:', response);
-          // Aquí puedes manejar el resultado de los productos si lo necesitas
+          console.log('Productos filtrados:', response);
         },
         error: (error) => {
           console.error('Error al obtener productos:', error);
