@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductImages } from '../../models/product.interface';
 import { ProductsService } from '../../services/products.service';
@@ -26,6 +27,8 @@ export class ProductDetailComponent implements OnInit {
   // Inyectar los servicios
   route: ActivatedRoute = inject(ActivatedRoute);
   productsService: ProductsService = inject(ProductsService);
+  router: Router = inject(Router); // Asegúrate de que esté bien inyectado
+
 
   product!: Product;
   isLoadingImage: boolean = false;
@@ -113,7 +116,12 @@ export class ProductDetailComponent implements OnInit {
 
         })
       ).subscribe()
-
-
+   
   }
+
+  // Método para redirigir al componente Home
+  goToHome() {
+    this.router.navigate(['/home']);
+  }
+    
 }

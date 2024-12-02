@@ -19,10 +19,8 @@
         </div>
         <div class="product-price">
             <span class="current-price">{{product?.price  || 0 | currency}}</span>
-            <span class="original-price">$300</span>
-            <span class="discount-tag">40% off</span>
         </div>
-        <p class="product-description">{{product?.description  || '' }}</p>
+        <p class="product-description">Especificaciones técnicas: {{ product?.description || '' }}</p>
         <div class="specifications">
             <div *ngFor="let spec of product?.specifications">
                 <h2 class="section-title">Select {{ spec.name }}</h2>
@@ -48,15 +46,8 @@
             </div>
             <button class="add-to-cart-btn">Agregar al carrito</button>
         </div>
+        <div class="go-to-home" >
+            <button class="back-to-list-btn" (click)="goToHome()">Regresar a la lista de productos</button>
+        </div>
     </div>
-</section>
-
-<section class="reviews">
-    <h3>Reseñas</h3>
-    <div class="review">
-        <h4>Samantha D. ⭐⭐⭐⭐⭐</h4>
-        <p>¡Me encanta la camiseta!. Viva la sele! </p>
-        <p class="review-date">Publicado el 15 de octubre de 2024</p>
-    </div>
-    <!-- Agrega más reseñas aquí -->
 </section>
