@@ -14,11 +14,23 @@ export class ProductsService {
   private http = inject(HttpClient);
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private productFilterDTO = new Subject<ProductFilterDTO>();
+  private query = new Subject<string>()
   private totalPagesSubject = new BehaviorSubject<number>(0);
   private currentPageSubject = new BehaviorSubject<number>(0);
 
   set setProducts(products: Product[]) {
     this.productsSubject.next(products);
+  }
+  set setCurrentPage(page: number) {
+    this.currentPageSubject.next(page);
+  }
+
+  set setProductFilterDTO(productFilter:ProductFilterDTO){
+    this.productFilterDTO.next(productFilter);
+  }
+
+  set setQuery(query:string){
+    this.query.next(query);
   }
 
   get getProducts() {
@@ -29,17 +41,15 @@ export class ProductsService {
     return this.totalPagesSubject.asObservable();
   }
 
-  set setCurrentPage(page: number) {
-    this.currentPageSubject.next(page);
+  get getQuery(){
+    return this.query.asObservable();
   }
+
 
   get getCurrentPage() {
     return this.currentPageSubject.asObservable();
   }
 
-  set setProductFilterDTO(productFilter:ProductFilterDTO){
-    this.productFilterDTO.next(productFilter);
-  }
 
   get getProductFilterDTO(){
     return this.productFilterDTO.asObservable();

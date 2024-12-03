@@ -20,6 +20,7 @@ export class ProductsPanelComponent {
   totalPages: number = 0;
   currentPage: number = 0;
   filters :ProductFilterDTO ={};
+  query: string = '';
 
   productsService: ProductsService = inject(ProductsService);
 
@@ -29,15 +30,15 @@ export class ProductsPanelComponent {
     });
     this.productsService.getTotalPages.subscribe(totalPages => this.totalPages = totalPages);
     this.productsService.getCurrentPage.subscribe(currentPage => this.currentPage = currentPage);
-      this.productsService.getProductFilterDTO.subscribe((filters)=>{
-        this.filters = filters;});
+    this.productsService.getProductFilterDTO.subscribe((filters)=> this.filters = filters);
+    this.productsService.getQuery.subscribe((query)=> this.query = query);
 
     this.loadPage(this.currentPage);
   }
 
   loadPage(page: number) {
     this.currentPage = page;
-    this.productsService.getAllProductsByQuery('',this.filters,page).subscribe();
+    this.productsService.getAllProductsByQuery(this.query,this.filters,page).subscribe();
   }
 
   getMainImage(product: Product): string {
