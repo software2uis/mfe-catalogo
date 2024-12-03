@@ -24,6 +24,9 @@ export class FilterPanelComponent {
     query: '',
   };
 
+  query: string = '';
+
+
   @Output() filtersChanged = new EventEmitter<ProductFilterDTO>();
 
   constructor(private productsService: ProductsService) {}
@@ -76,7 +79,8 @@ export class FilterPanelComponent {
           combinedFilters.categoryName,
           combinedFilters.score,
           combinedFilters.minPrice,
-          combinedFilters.maxPrice
+          combinedFilters.maxPrice,
+          this.query
         )
         .subscribe({
           next: (response) => {
