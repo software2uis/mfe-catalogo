@@ -147,9 +147,11 @@ export class ProductsService {
     Category: string,
     rating: number,
     minPrice: number,
-    maxPrice: number
+    maxPrice: number,
+    query?: string
   ) {
     const body = {
+      query,
       categoryName: Category,
       score: rating,
       minPrice: minPrice,

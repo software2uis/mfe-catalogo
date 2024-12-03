@@ -24,9 +24,17 @@ export class FilterPanelComponent {
     query: '',
   };
 
+  query: string = '';
+
+
   @Output() filtersChanged = new EventEmitter<ProductFilterDTO>();
 
   constructor(private productsService: ProductsService) {}
+
+  ngOnInit(){
+    this.productsService.getQuery.subscribe((query)=> this.query = query);
+
+  }
 
 
   // Método para aplicar los filtros combinados
@@ -76,7 +84,8 @@ export class FilterPanelComponent {
           combinedFilters.categoryName,
           combinedFilters.score,
           combinedFilters.minPrice,
-          combinedFilters.maxPrice
+          combinedFilters.maxPrice,
+          this.query
         )
         .subscribe({
           next: (response) => {
