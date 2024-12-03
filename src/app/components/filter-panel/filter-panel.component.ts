@@ -31,6 +31,11 @@ export class FilterPanelComponent {
 
   constructor(private productsService: ProductsService) {}
 
+  ngOnInit(){
+    this.productsService.getQuery.subscribe((query)=> this.query = query);
+
+  }
+
 
   // Método para aplicar los filtros combinados
   applyFilters() {
