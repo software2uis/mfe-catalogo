@@ -1,4 +1,4 @@
-export const environment = {
+export const environments = {
   production:false,
   mfCatalogo: 'http://192.168.193.90',
   mfCarrito: 'http://192.168.193.90:90',
