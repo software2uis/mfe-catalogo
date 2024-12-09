@@ -73,7 +73,7 @@ export class ProductComponent {
 
     if (existingProductIndex !== -1) {
       // Si ya existe, incrementar la cantidad
-      this.cart[existingProductIndex].quantity += 1;
+      this.cart[existingProductIndex].quantity = 1;
     } else {
       // Si no existe, agregar el producto al carrito
       this.cart.push(productToAdd);

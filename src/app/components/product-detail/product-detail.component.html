@@ -9,7 +9,7 @@
             <div class="stars">
               @for (item of [1,2,3,4,5]; track $index) {
 
-                <img *ngIf="item <= product.score" src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+                <img *ngIf="item <= product!.score" src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
               }
             </div>
             <span class="rating-score">{{product?.score || 0}}/5</span>

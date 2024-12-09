@@ -77,6 +77,7 @@ export class ProductDetailComponent implements OnInit {
   // Método para agregar el producto al carrito
   addToCart() {
     // Crear el objeto del producto a agregar
+    console.log(this.quantity);
     const productToAdd = {
       idMongo: this.product.id, // Identificador único del producto
       name: this.product.name,
@@ -96,9 +97,10 @@ export class ProductDetailComponent implements OnInit {
     // Buscar si el producto ya existe en el carrito
     const existingProductIndex = this.cart.findIndex((item: any) => item.idMongo === productToAdd.idMongo);
 
+    console.log(existingProductIndex);
     if (existingProductIndex !== -1) {
       // Si ya existe, incrementar la cantidad
-      this.cart[existingProductIndex].quantity += this.quantity;
+      this.cart[existingProductIndex].quantity = this.quantity;
     } else {
       // Si no existe, agregar el producto al carrito
       this.cart.push(productToAdd);
