@@ -6,7 +6,9 @@ import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-import { map, switchMap, tap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
+import { CarritoService } from '../../services/carrito.service';
+import { ProductCarrito } from '../../models/product-carrito.interface';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,9 +24,11 @@ export class ProductDetailComponent implements OnInit {
   selectedColor: string = ''; // Color seleccionado
   selectedSpecs: { [key: string]: string } = {}; // Almacena todas las especificaciones seleccionadas
   successMessage: string = ''; // Mensaje de éxito para agregar al carrito
-
+  user: string  | null = null;
   route: ActivatedRoute = inject(ActivatedRoute);
   productsService: ProductsService = inject(ProductsService);
+  carritoService = inject(CarritoService);
+  cart: ProductCarrito[]  = [];
   router: Router = inject(Router); // Asegúrate de que esté bien inyectado
 
 
@@ -73,6 +77,7 @@ export class ProductDetailComponent implements OnInit {
   // Método para agregar el producto al carrito
   addToCart() {
     // Crear el objeto del producto a agregar
+    console.log(this.quantity);
     const productToAdd = {
       idMongo: this.product.id, // Identificador único del producto
       name: this.product.name,
@@ -83,21 +88,32 @@ export class ProductDetailComponent implements OnInit {
     };
 
     // Obtener el carrito actual desde localStorage
-    const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    if(!this.user){
 
-    // Buscar si el producto ya existe en el carrito
-    const existingProductIndex = cart.findIndex((item: any) => item.idMongo === productToAdd.idMongo);
-
-    if (existingProductIndex !== -1) {
-      // Si ya existe, incrementar la cantidad
-      cart[existingProductIndex].quantity += productToAdd.quantity;
-    } else {
-      // Si no existe, agregar el producto al carrito
-      cart.push(productToAdd);
+      this.cart = JSON.parse(localStorage.getItem('cartItems') || '[]') ;
     }
 
-    // Guardar el carrito actualizado en localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cart));
+
+    // Buscar si el producto ya existe en el carrito
+    const existingProductIndex = this.cart.findIndex((item: any) => item.idMongo === productToAdd.idMongo);
+
+    console.log(existingProductIndex);
+    if (existingProductIndex !== -1) {
+      // Si ya existe, incrementar la cantidad
+      this.cart[existingProductIndex].quantity = this.quantity;
+    } else {
+      // Si no existe, agregar el producto al carrito
+      this.cart.push(productToAdd);
+    }
+
+    if(this.user){
+      this.carritoService.addProductsToCart(this.cart, this.user).subscribe();
+    }else{
+      // Guardar el carrito actualizado en localStorage
+
+      localStorage.setItem('cartItems', JSON.stringify(this.cart));
+    }
+
 
     // Mostrar mensaje de éxito
     this.successMessage = 'El producto se añadió exitosamente al carrito';
@@ -110,6 +126,21 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     // Obtener los detalles del producto basado en el ID de la ruta
+
+    this.user = localStorage.getItem('username');
+
+    if(this.user){
+      this.carritoService.getCartContents(this.user)
+      .pipe(
+        tap((response) => {
+
+          this.cart = response.filter((item: ProductCarrito) => item.idMongo !== null && this.idProducto === item.idMongo);
+        })
+      ).subscribe();
+
+    }
+
+
     this.route.params.pipe(
       map(params => params['id']),
       tap(id => this.idProducto = id),

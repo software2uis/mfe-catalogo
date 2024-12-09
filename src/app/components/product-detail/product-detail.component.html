@@ -2,18 +2,17 @@
     <div class="product-images">
         <img [src]="selectedImage" alt="Imagen frontal" class="main-image">
     </div>
-  
+
     <div class="product-details">
         <h1 class="product-title">{{product?.name || ''}}</h1>
         <div class="product-rating">
             <div class="stars">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fcd6232dcd342bd4dfc3d820d0a84b8db79146c27eb1274d052059d26b8532f?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc81743b1a9f424b78edf6ca642d56af350c93586420c327c6ab89243fa9ad0d?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0be8d9e9adcae95d9775e3762410c4f27eb177b989fcae672ef78f777ca1a771?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ce16bce060f92cb4284fd2eae8917daa4b347fff230a07d3a0174bfd62b11e0?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+              @for (item of [1,2,3,4,5]; track $index) {
+
+                <img *ngIf="item <= product!.score" src="https://cdn.builder.io/api/v1/image/assets/TEMP/de376dc9c367657bc0f2a206917b86cd9c12a0d93917ac93064bbd3e88e0e975?placeholderIfAbsent=true&apiKey=dc69bff7e6ce492dbfb73daeaaffdb37" alt="" class="star">
+              }
             </div>
-            <span class="rating-score">4.5/5</span>
+            <span class="rating-score">{{product?.score || 0}}/5</span>
         </div>
         <div class="product-price">
             <span class="current-price">{{product?.price  || 0 | currency}}</span>
@@ -49,4 +48,3 @@
         </div>
     </div>
   </section>
-  
