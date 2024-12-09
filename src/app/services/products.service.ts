@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  apiUrl = `${environment.baseUrl}/public/api/products`;
+  apiUrl = `${environment.backCatalogo}/public/api/products`;
   private http = inject(HttpClient);
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private productFilterDTO = new Subject<ProductFilterDTO>();
@@ -69,7 +69,7 @@ export class ProductsService {
 
     return this.http
       .post<ResponsePaginated<Product>>(
-        `${environment.baseUrl}/public/api/products`,
+        `${environment.backCatalogo}/public/api/products`,
         filter,
         { params }
       )
@@ -83,7 +83,7 @@ export class ProductsService {
 
   getProductById(id: string) {
     return this.http.get<Product>(
-      `${environment.baseUrl}/public/api/products/${id}`
+      `${environment.backCatalogo}/public/api/products/${id}`
     );
   }
   getProductsByCategory(category: string) {
@@ -93,7 +93,7 @@ export class ProductsService {
 
     return this.http
       .post<ResponsePaginated<Product>>(
-        `${environment.baseUrl}/public/api/products`,
+        `${environment.backCatalogo}/public/api/products`,
         body
       )
       .pipe(
@@ -110,7 +110,7 @@ export class ProductsService {
 
     return this.http
       .post<ResponsePaginated<Product>>(
-        `${environment.baseUrl}/public/api/products`,
+        `${environment.backCatalogo}/public/api/products`,
         body
       )
       .pipe(
@@ -132,7 +132,7 @@ export class ProductsService {
 
     return this.http
       .post<ResponsePaginated<Product>>(
-        `${environment.baseUrl}/public/api/products`,
+        `${environment.backCatalogo}/public/api/products`,
         body
       )
       .pipe(
@@ -164,7 +164,7 @@ export class ProductsService {
 
     return this.http
       .post<ResponsePaginated<Product>>(
-        `${environment.baseUrl}/public/api/products`,
+        `${environment.backCatalogo}/public/api/products`,
         body,
         {params}
       )

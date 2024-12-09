@@ -3,6 +3,8 @@ import { Component, inject, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ProductImages } from '../../models/product.interface';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CarritoService } from '../../services/carrito.service';
+import { ProductCarrito } from '../../models/product-carrito.interface';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +17,7 @@ export class ProductComponent {
 
   router = inject(Router);
   route = inject(ActivatedRoute);
+  carritoService = inject(CarritoService);
 
   @Input() id: number = 0;
   @Input() idMongo: string = '';
@@ -23,6 +26,12 @@ export class ProductComponent {
   @Input() imageUrl: string = '';
   @Input() rating: number = 0;
 
+  user: string  | null = null;
+
+  ngOnInit(): void {
+    // Cargar productos desde localStorage al iniciar el componente
+    this.user = localStorage.getItem('username');
+  }
   ProductImages = ProductImages;
 
   // Navegar a la página de detalles del producto
@@ -42,7 +51,8 @@ export class ProductComponent {
     };
 
     // Obtener el carrito actual desde localStorage
-    const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    const cart = JSON.parse(localStorage.getItem('cartItems') || '[]') as ProductCarrito[];
+
 
     // Buscar si el producto ya existe en el carrito
     const existingProductIndex = cart.findIndex((item: any) => item.idMongo === productToAdd.idMongo);
@@ -55,8 +65,14 @@ export class ProductComponent {
       cart.push(productToAdd);
     }
 
-    // Guardar el carrito actualizado en localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cart));
+    if(this.user){
+      this.carritoService.addProductsToCart(cart, this.user).subscribe();
+    }else{
+      // Guardar el carrito actualizado en localStorage
+
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    }
+
 
     // Mostrar mensaje de confirmación
     alert('El producto se añadió exitosamente al carrito');
