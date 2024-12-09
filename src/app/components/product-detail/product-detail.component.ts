@@ -98,7 +98,7 @@ export class ProductDetailComponent implements OnInit {
 
     if (existingProductIndex !== -1) {
       // Si ya existe, incrementar la cantidad
-      this.cart[existingProductIndex].quantity += productToAdd.quantity;
+      this.cart[existingProductIndex].quantity += this.quantity;
     } else {
       // Si no existe, agregar el producto al carrito
       this.cart.push(productToAdd);
